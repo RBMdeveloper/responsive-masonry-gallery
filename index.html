@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+<!-- =========================
+     CUSTOM GALLERY SECTION
+========================= -->
+
+<section class="cg-gallery-section">
+    <div class="cg-gallery-grid">
+
+        <div class="cg-gallery-item">
+            <img src="assets/vidyalay/new/1.jpeg" alt="">
+        </div>
+
+        <div class="cg-gallery-item">
+            <img src="assets/vidyalay/new/2.jpeg" alt="">
+        </div>
+
+        <div class="cg-gallery-item">
+            <img src="assets/vidyalay/new/3.jpeg" alt="">
+        </div>
+
+
+        <div class="cg-gallery-item">
+            <img src="assets/vidyalay/new/17.jpeg" alt="">
+        </div>
+
+        <div class="cg-gallery-item">
+            <img src="assets/vidyalay/gallery/1.png" alt="">
+        </div>
+
+        <div class="cg-gallery-item">
+            <img src="assets/vidyalay/gallery/2.png" alt="">
+        </div>
+
+        <div class="cg-gallery-item">
+            <img src="assets/vidyalay/gallery/3.png" alt="">
+        </div>
+
+    </div>
+</section>
+
+
+<!-- =========================
+     LIGHTBOX
+========================= -->
+
+<div class="cg-lightbox">
+    <span class="cg-lightbox-close">&times;</span>
+    <img class="cg-lightbox-image" src="" alt="">
+</div>
+
+
+<!-- =========================
+     CSS
+========================= -->
+
+<style>
+
+.cg-gallery-section{
+    width:100%;
+    padding:60px 20px;
+    box-sizing:border-box;
+}
+
+/* Masonry Layout */
+.cg-gallery-grid{
+    column-count:4;
+    column-gap:18px;
+}
+
+.cg-gallery-item{
+    position:relative;
+    margin-bottom:18px;
+    overflow:hidden;
+    border-radius:14px;
+    cursor:pointer;
+    break-inside:avoid;
+    background:#f3f3f3;
+}
+
+.cg-gallery-item img{
+    width:100%;
+    height:auto;
+    display:block;
+    border-radius:14px;
+    transition:transform .4s ease;
+}
+
+/* Hover Effect */
+.cg-gallery-item:hover img{
+    transform:scale(1.05);
+}
+
+/* Overlay */
+.cg-gallery-item::after{
+    content:'';
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,0.12);
+    opacity:0;
+    transition:.3s;
+}
+
+.cg-gallery-item:hover::after{
+    opacity:1;
+}
+
+/* Responsive */
+@media(max-width:1200px){
+    .cg-gallery-grid{
+        column-count:3;
+    }
+}
+
+@media(max-width:768px){
+    .cg-gallery-grid{
+        column-count:2;
+    }
+}
+
+@media(max-width:480px){
+    .cg-gallery-grid{
+        column-count:1;
+    }
+}
+
+
+
+/* =========================
+   LIGHTBOX
+========================= */
+
+.cg-lightbox{
+    position:fixed;
+    inset:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.92);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    opacity:0;
+    visibility:hidden;
+    transition:.3s ease;
+    z-index:999999;
+    padding:20px;
+    box-sizing:border-box;
+}
+
+.cg-lightbox.active{
+    opacity:1;
+    visibility:visible;
+}
+
+.cg-lightbox-image{
+    max-width:90%;
+    max-height:90%;
+    border-radius:10px;
+    object-fit:contain;
+    animation:cgZoom .3s ease;
+}
+
+@keyframes cgZoom{
+    from{
+        transform:scale(.8);
+        opacity:0;
+    }
+    to{
+        transform:scale(1);
+        opacity:1;
+    }
+}
+
+.cg-lightbox-close{
+    position:absolute;
+    top:20px;
+    right:30px;
+    color:#fff;
+    font-size:42px;
+    cursor:pointer;
+    line-height:1;
+    z-index:2;
+}
+
+</style>
+
+
+
+<!-- =========================
+     JS
+========================= -->
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function(){
+
+    const galleryItems = document.querySelectorAll('.cg-gallery-item img');
+    const lightbox = document.querySelector('.cg-lightbox');
+    const lightboxImg = document.querySelector('.cg-lightbox-image');
+    const closeBtn = document.querySelector('.cg-lightbox-close');
+
+    galleryItems.forEach(img => {
+
+        img.addEventListener('click', function(){
+
+            lightbox.classList.add('active');
+            lightboxImg.src = this.src;
+
+        });
+
+    });
+
+    closeBtn.addEventListener('click', function(){
+
+        lightbox.classList.remove('active');
+
+    });
+
+    lightbox.addEventListener('click', function(e){
+
+        if(e.target !== lightboxImg){
+            lightbox.classList.remove('active');
+        }
+
+    });
+
+});
+
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
